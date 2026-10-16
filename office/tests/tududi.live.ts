@@ -129,7 +129,7 @@ test("9393: agent → separate account → project/task/note → read → status
     store.db.prepare('UPDATE agents SET tududi_password_encrypted=NULL WHERE id=?').run(aid!);
     const legacyLink=await app.inject({method:'POST',url:`/api/agents/${aid}/tududi-link`,headers,payload:{}});
     const legacyOpened=await app.inject({url:legacyLink.json().url,headers});
-    // The old fork ignored admin password changes (409, password not stored); pixel-office-tududi 0.87-po.3
+    // The old fork ignored admin password changes (409, password not stored); pixel-office-tududi 0.87-po.4
     // accepts the verified new password. Neither case may store an unverified password.
     const extraAgentLogins=legacyOpened.statusCode===409?0:2;
     const storedAfterLink=store.db.prepare('SELECT tududi_password_encrypted FROM agents WHERE id=?').get(aid!)!.tududi_password_encrypted;

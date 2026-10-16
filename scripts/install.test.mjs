@@ -62,7 +62,7 @@ test("Fresh install: shared key, matching administrator and private file permiss
   try {
     const result = prepareInstall(root);
     assert.equal(result.created, 4);
-    assert.equal(result.image, 'pixel-office-tududi:0.87-po.3');
+    assert.equal(result.image, 'pixel-office-tududi:0.87-po.4');
     assert.equal(existsSync(join(root, 'docker-compose.override.yml')), false);
     const office = env(root, 'office/.env'), runner = env(root, 'runner/.env'), tududi = env(root, 'tududi/.env');
     assert.match(office.OFIS_SECRET_KEY, /^[a-f\d]{64}$/);
@@ -154,7 +154,7 @@ test("Full helper reads Docker images only, prints startup commands and hides se
     assert.match(result.stdout, /Warning: the Tududi image/);
     assert.match(result.stdout, /docker compose up -d --build/);
     assert.match(result.stdout, /No container or service was started/);
-    assert.equal(readFileSync(calls, 'utf8'), 'image inspect pixel-office-tududi:0.87-po.3\n');
+    assert.equal(readFileSync(calls, 'utf8'), 'image inspect pixel-office-tududi:0.87-po.4\n');
     for (const path of ['office/.env', 'runner/.env', 'tududi/.env']) {
       for (const [key, value] of Object.entries(env(root, path))) {
         if (/PASSWORD|SECRET|KEY/.test(key) && value) assert.ok(!result.stdout.includes(value) && !result.stderr.includes(value));
@@ -179,7 +179,7 @@ test("Clean Compose binds only local ports; private-address overrides configure 
       return JSON.parse(result.stdout).services;
     };
     let services = config();
-    assert.equal(services.tududi.image, 'pixel-office-tududi:0.87-po.3');
+    assert.equal(services.tududi.image, 'pixel-office-tududi:0.87-po.4');
     assert.equal(services.tududi.ports.length, 2);
     assert.ok(services.tududi.ports.every(port => port.host_ip === '127.0.0.1'));
     assert.equal(services['tududi-proxy'].environment.TUDUDI_PROXY_BIND, '127.0.0.1');

@@ -1,6 +1,5 @@
 // Prepare a writable workspace before loading tsx or Vite.
-import { mkdtempSync, rmSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { mkdirSync, mkdtempSync, rmSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
@@ -13,7 +12,9 @@ const stop = () => { interrupted = true; child?.kill('SIGTERM'); };
 process.on('SIGINT', stop);
 process.on('SIGTERM', stop);
 try {
-  work = mkdtempSync(join(tmpdir(), 'pixel-office-screenshots-'));
+  const temporaryRoot = resolve(root, '.test-data');
+  mkdirSync(temporaryRoot, { recursive: true });
+  work = mkdtempSync(join(temporaryRoot, 'screenshots-work-'));
   child = spawn(process.execPath, ['--import', 'tsx', 'scripts/screenshots.ts', ...process.argv.slice(2)], {
     cwd: root,
     stdio: 'inherit',

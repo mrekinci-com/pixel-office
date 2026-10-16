@@ -113,7 +113,7 @@ export function prepareInstall(root) {
     mkdirSync(join(root, path), { recursive: true, mode: 0o700 });
   }
   writeFileSync(join(root, '.cache/install/pixel-office-runner.service'), service, { mode: 0o600 });
-  return { created: pending.length, image: compose.PIKSEL_OFIS_TUDUDI_IMAGE || 'pixel-office-tududi:0.87-po.3', privateNetwork: !!ip, claudeLoginCommand: claudeLoginCommand(runner.OFIS_WORK_DIR || join(root, "runner/work")) };
+  return { created: pending.length, image: compose.PIKSEL_OFIS_TUDUDI_IMAGE || 'pixel-office-tududi:0.87-po.4', privateNetwork: !!ip, claudeLoginCommand: claudeLoginCommand(runner.OFIS_WORK_DIR || join(root, "runner/work")) };
 }
 
 function main() {

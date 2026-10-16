@@ -3,7 +3,7 @@
 name: pixel-office
 services:
   tududi:
-    image: ${PIKSEL_OFIS_TUDUDI_IMAGE:-pixel-office-tududi:0.87-po.3}
+    image: ${PIKSEL_OFIS_TUDUDI_IMAGE:-pixel-office-tududi:0.87-po.4}
     container_name: pixel-office-tududi
     restart: unless-stopped
     env_file: ./tududi/.env

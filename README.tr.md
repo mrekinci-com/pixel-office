@@ -5,9 +5,23 @@ Güvenlik sınırları, desteklenen kurulum ve özel açık bildirimi:
 
 [English](README.md) · [Türkçe](README.tr.md)
 
+## Nedir?
+
 Piksel Ofis, yapay zekâ ajanlarını aynı şirkette çalışan bir ekip gibi yönetmenizi sağlar. Bölümleri ve çalışanları siz kurarsınız; görevlerini, konuşmalarını ve durumlarını canlı bir piksel ofiste izlersiniz. Her ajanın ayrı Tududi hesabı, görevleri ve çalışma defteri vardır. Genel Müdür terminalinden ekiple konuşabilir, işleri dağıtabilir ve sonuçları takip edebilirsiniz.
 
 Her iş kolu için kullanılabilir. Hazır bir şirket veya belirli bir sektöre ait verilerle başlamaz. Arayüz Türkçe ve İngilizcedir. Yeni ofis, tarayıcı dilinden bağımsız olarak İngilizce açılır. Türkçe, TR/EN düğmesinden veya ofis dili ayarından seçilir. Tercih sol alttaki kullanıcı menüsünden veya Kullanım ve kota ekranındaki Ofis dili ayarından değiştirilip saklanır. Mevcut ofislerin saklanan dili korunur; kullanıcı talimatları, adları, notları ve eski olayları çevrilmez.
+
+## Ekran görüntüleri
+
+Görüntülerin tamamında hayalî deneme verileri kullanılmıştır. Çalıştırıcı bağlantısı ve Genel Müdür oturumu sahtedir; gerçek model çağrısı yapılmamıştır. Görüntüler İngilizce arayüzle hazırlanmıştır.
+
+![Dört ajan çalışırken ofis ve genel ekip sohbeti](docs/images/office.png)
+
+![Yazar ve denetçi işe alıp tanıtım görevlerini dağıtan Genel Müdür terminali](docs/images/director.png)
+
+| Büyütülmüş ofis · aydınlık tema | Ajanlar · hazır hesaplar | Görevler ve notlar |
+| --- | --- | --- |
+| [![Aydınlık temada büyütülmüş piksel ofis](docs/images/office-expanded.png)](docs/images/office-expanded.png) | [![Tududi hesapları hazır yedi hayalî ajan](docs/images/agents.png)](docs/images/agents.png) | [![Örnek ürün tanıtımı görev panosu](docs/images/tasks.png)](docs/images/tasks.png) |
 
 ## Gereksinimler
 
@@ -15,7 +29,7 @@ Her iş kolu için kullanılabilir. Hazır bir şirket veya belirli bir sektöre
 - Linux sunucu, Node.js **24 veya üstü**, `bubblewrap` (`bwrap`), `tmux`, Python 3. Çalıştırıcı sunucuda, kapsayıcıların dışında çalışır. Kullanıcı ad alanları açık olmalıdır.
 - Codex CLI **0.138 veya üstü** ve Codex kullanabilen bir Codex/ChatGPT hesabı. Hesabın model erişimi ve kullanım sınırları geçerlidir. CLI seçenekleri 0.159.1 ile sınanmıştır; asgari terminal sürümü bütün sürümlerle uyum garantisi değildir.
 - Node bağımlılıkları kurulurken `node-pty` için gerekirse `make` ve C++ derleyicisi.
-- Uyarlanmış Tududi imajı: **`pixel-office-tududi:0.87-po.3`**. Standart Tududi imajı bu kurulumun yerine geçmez. Kaynağı ayrı `https://github.com/mrekinci-com/pixel-office-tududi` deposunda yayımlanacaktır; o deponun imaj hazırlama adımlarını izleyin.
+- Uyarlanmış Tududi imajı: **`pixel-office-tududi:0.87-po.4`**. Standart Tududi imajı bu kurulumun yerine geçmez. Kaynağı ayrı `https://github.com/mrekinci-com/pixel-office-tududi` deposunda yayımlanacaktır; o deponun imaj hazırlama adımlarını izleyin.
 
 Node.js ve Codex, servisi çalıştıracak Linux kullanıcısının erişebildiği konumlarda olmalıdır. Windows/macOS üzerinde çalıştırıcı desteği yoktur.
 

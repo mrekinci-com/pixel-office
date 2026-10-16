@@ -5,9 +5,23 @@ Security boundaries, supported deployments, and private vulnerability reporting:
 
 [English](README.md) · [Turkish](README.tr.md)
 
+## What it is
+
 Pixel Office lets you manage AI agents as a team working in the same company. You create the departments and employees, then follow their tasks, conversations and status in a live pixel office. Each agent has its own Tududi account, tasks and workbook. Use the Director terminal to talk to the team, assign work and track results.
 
 It works for any line of business. New installations start without a sample company or industry-specific data. The interface supports **English and Turkish**. A new office always starts in English, regardless of the browser language. Select Turkish with the TR/EN control or office language setting. Change the saved office language in the bottom-left user controls or under Usage and limits → Office language. Existing offices keep their saved language after upgrading. Agent instructions, names, notes and past events are not translated.
+
+## Screenshots
+
+All screenshots use fictional sample data. The connected runner and Director session are simulated; no model calls were made.
+
+![Pixel Office with four agents working and a shared team conversation](docs/images/office.png)
+
+![Director terminal hiring a writer and a reviewer and assigning launch tasks](docs/images/director.png)
+
+| Expanded office · light theme | Agents · ready accounts | Tasks and notes |
+| --- | --- | --- |
+| [![Expanded pixel office in the light theme](docs/images/office-expanded.png)](docs/images/office-expanded.png) | [![Seven fictional agents with ready Tududi accounts](docs/images/agents.png)](docs/images/agents.png) | [![Sample product launch task board](docs/images/tasks.png)](docs/images/tasks.png) |
 
 ## Requirements
 
@@ -16,7 +30,7 @@ It works for any line of business. New installations start without a sample comp
 - For optional Claude agents and the Director terminal: Claude Code **2.1.285 or later**, with a dedicated Claude account. **Claude support is experimental — not tested with a real account.**
 - Codex CLI **0.138 or later** and a Codex/ChatGPT account with Codex access. The account's model access and usage limits apply. CLI options were tested with 0.159.1; the minimum terminal version does not guarantee compatibility with every version.
 - If needed to build `node-pty` when installing Node dependencies: `make` and a C++ compiler.
-- The adapted Tududi image: **`pixel-office-tududi:0.87-po.3`**. The standard Tududi image is not a substitute. Its source will be published separately at `https://github.com/mrekinci-com/pixel-office-tududi`; follow that repository's image preparation instructions.
+- The adapted Tududi image: **`pixel-office-tududi:0.87-po.4`**. The standard Tududi image is not a substitute. Its source will be published separately at `https://github.com/mrekinci-com/pixel-office-tududi`; follow that repository's image preparation instructions.
 
 Node.js and Codex must be accessible to the Linux user running the service. The runner does not support Windows or macOS.
 
