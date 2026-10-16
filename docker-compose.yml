@@ -3,7 +3,7 @@
 name: pixel-office
 services:
   tududi:
-    image: ${PIKSEL_OFIS_TUDUDI_IMAGE:-pixel-office-tududi:0.87-po.4}
+    image: ${PIKSEL_OFIS_TUDUDI_IMAGE:-pixel-office-tududi:0.87-po.5}
     container_name: pixel-office-tududi
     restart: unless-stopped
     env_file: ./tududi/.env
@@ -34,8 +34,11 @@ services:
     image: pixel-office:latest
     container_name: pixel-office
     restart: unless-stopped
+    # The office shares the Tududi container's network; recreating Tududi must recreate the office too.
     depends_on:
-      - tududi
+      tududi:
+        condition: service_started
+        restart: true
     env_file: ./office/.env
     environment:
       PORT: "9400"

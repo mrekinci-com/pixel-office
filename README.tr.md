@@ -29,7 +29,7 @@ Görüntülerin tamamında hayalî deneme verileri kullanılmıştır. Çalışt
 - Linux sunucu, Node.js **24 veya üstü**, `bubblewrap` (`bwrap`), `tmux`, Python 3. Çalıştırıcı sunucuda, kapsayıcıların dışında çalışır. Kullanıcı ad alanları açık olmalıdır.
 - Codex CLI **0.138 veya üstü** ve Codex kullanabilen bir Codex/ChatGPT hesabı. Hesabın model erişimi ve kullanım sınırları geçerlidir. CLI seçenekleri 0.159.1 ile sınanmıştır; asgari terminal sürümü bütün sürümlerle uyum garantisi değildir.
 - Node bağımlılıkları kurulurken `node-pty` için gerekirse `make` ve C++ derleyicisi.
-- Uyarlanmış Tududi imajı: **`pixel-office-tududi:0.87-po.4`**. Standart Tududi imajı bu kurulumun yerine geçmez. Kaynağı ayrı `https://github.com/mrekinci-com/pixel-office-tududi` deposunda yayımlanacaktır; o deponun imaj hazırlama adımlarını izleyin.
+- Uyarlanmış Tududi imajı: **`pixel-office-tududi:0.87-po.5`**. Standart Tududi imajı bu kurulumun yerine geçmez. Kaynağı ayrı `https://github.com/mrekinci-com/pixel-office-tududi` deposunda yayımlanacaktır; o deponun imaj hazırlama adımlarını izleyin.
 
 Node.js ve Codex, servisi çalıştıracak Linux kullanıcısının erişebildiği konumlarda olmalıdır. Windows/macOS üzerinde çalıştırıcı desteği yoktur.
 

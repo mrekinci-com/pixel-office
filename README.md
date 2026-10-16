@@ -30,7 +30,7 @@ All screenshots use fictional sample data. The connected runner and Director ses
 - For optional Claude agents and the Director terminal: Claude Code **2.1.285 or later**, with a dedicated Claude account. **Claude support is experimental — not tested with a real account.**
 - Codex CLI **0.138 or later** and a Codex/ChatGPT account with Codex access. The account's model access and usage limits apply. CLI options were tested with 0.159.1; the minimum terminal version does not guarantee compatibility with every version.
 - If needed to build `node-pty` when installing Node dependencies: `make` and a C++ compiler.
-- The adapted Tududi image: **`pixel-office-tududi:0.87-po.4`**. The standard Tududi image is not a substitute. Its source will be published separately at `https://github.com/mrekinci-com/pixel-office-tududi`; follow that repository's image preparation instructions.
+- The adapted Tududi image: **`pixel-office-tududi:0.87-po.5`**. The standard Tududi image is not a substitute. Its source will be published separately at `https://github.com/mrekinci-com/pixel-office-tududi`; follow that repository's image preparation instructions.
 
 Node.js and Codex must be accessible to the Linux user running the service. The runner does not support Windows or macOS.
 
