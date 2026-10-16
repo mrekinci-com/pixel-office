@@ -9,7 +9,8 @@ import { PROTOCOL_VERSION } from '../shared/runtime.js';
 import { TERMINAL_BUFFER_BYTES } from '../shared/terminal.js';
 const tick=()=>new Promise(r=>setTimeout(r,20));
 async function setup(){
-  let now=Date.now();
+  // Start at 06:00 UTC today: duration totals are per office day, so a clock near midnight would split them.
+  let now=Date.parse(new Date().toISOString().slice(0,10)+"T06:00:00.000Z");
   const config={...testConfig(),publicOrigin:'http://ofis.test',runnerKey:'b24-sahte-calisitirici-anahtari-'.repeat(3)},fake=fakeTududi(),c=await createApp(config,{fetcher:fake.fetcher,background:false,scheduleClock:()=>now});
   const login=await c.app.inject({method:'POST',url:'/api/login',headers:{'x-ofis-islem':'1'},payload:{password:config.ownerPassword}});
   const headers={cookie:String(login.headers['set-cookie']).split(';')[0],'x-ofis-islem':'1',origin:config.publicOrigin};
