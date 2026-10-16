@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env
+.cache/
+.test-data/
+work/
+
+work-test/
+test-code/
+.smoke/
+.env.*
+!.env.example
+!.env.test.example

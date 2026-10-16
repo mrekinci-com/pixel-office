@@ -1,0 +1,47 @@
+# Optional Compose override for a separate test/staging instance.
+# With the root Compose file: docker compose -f docker-compose.yml -f office/compose.example.yml ...
+# Set a private address with OFIS_PRIVATE_IP; do not use 0.0.0.0.
+services:
+  tududi:
+    environment:
+      FRONTEND_URL: http://${OFIS_PRIVATE_IP:-127.0.0.1}:9394
+      TUDUDI_ALLOWED_ORIGINS: http://localhost:9393,http://127.0.0.1:9393,http://${OFIS_PRIVATE_IP:-127.0.0.1}:9394,http://${OFIS_PRIVATE_IP:-127.0.0.1}:9400
+    ports:
+      - "127.0.0.1:9401:9401"
+  office:
+    environment:
+      OFIS_PUBLIC_URL: http://${OFIS_PRIVATE_IP:-127.0.0.1}:9400
+      TUDUDI_PUBLIC_URL: http://${OFIS_PRIVATE_IP:-127.0.0.1}:9394
+  tududi-proxy:
+    profiles: [proxy]
+    build:
+      context: ./office
+    network_mode: host
+    command: [node, dist/server/proxy-index.js]
+    environment:
+      TUDUDI_PROXY_BIND: ${OFIS_PRIVATE_IP:-127.0.0.1}
+      TUDUDI_PROXY_PORT: "9394"
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    read_only: true
+    tmpfs: [/tmp]
+    restart: unless-stopped
+  office-test:
+    profiles: [staging]
+    build:
+      context: ./office
+    env_file: ./office/.env.test
+    environment:
+      PORT: "9401"
+      OFIS_DATA_DIR: /app/data
+      OFIS_PUBLIC_URL: http://127.0.0.1:9401
+      TUDUDI_BASE_URL: http://127.0.0.1:9393
+      TUDUDI_PUBLIC_URL: ""
+    network_mode: service:tududi
+    depends_on: [tududi]
+    volumes: [./office/data-test:/app/data]
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    read_only: true
+    tmpfs: [/tmp]
+    stop_grace_period: 20s

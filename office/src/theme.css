@@ -1,0 +1,191 @@
+/* All application colors live here; the canvas pixel palette is independent. */
+:root {
+  /* surfaces */
+  --bg: #eef0f6;
+  --surface: #ffffff;
+  --surface-2: #f5f6fb;
+  --sunken: #e4e7f1;
+  --line: #dadeea;
+  --line-strong: #bcc3d6;
+  /* metin */
+  --ink: #161a2e;
+  --ink-2: #434a66;
+  --ink-3: #5b6381;
+  /* vurgu: ekran mavisi */
+  --accent: #3b4bd6;
+  --accent-hover: #2f3db9;
+  --accent-edge: #232f94;
+  --on-accent: #ffffff;
+  --accent-soft: #e5e8fd;
+  --accent-text: #2c3ab0;
+  /* honey: pixel accents */
+  --honey: #f0ae35;
+  --honey-soft: #fcefd2;
+  --honey-text: #7a4d00;
+  /* durumlar */
+  --idle: #1193a3;
+  --idle-soft: #dcf2f4;
+  --idle-text: #0a6470;
+  --working: #1c9a5b;
+  --working-soft: #dcf3e6;
+  --working-text: #136c40;
+  --waiting: #aa6c00;
+  --waiting-soft: #fcefd2;
+  --waiting-text: #7a4d00;
+  --off: #77809a;
+  --off-soft: #e9ebf2;
+  --off-text: #555c75;
+  --danger: #cc3545;
+  --danger-soft: #fbe3e6;
+  --danger-text: #a01f2e;
+  /* Keep side navigation light too. */
+  /* ofis yer tutucusu */
+  --office-wall: #6f4327;
+  --office-floor: #e8b96a;
+  --office-ink: #2a1a0e;
+  --office-paper: #fff6e0;
+  /* focus, shadow */
+  --focus: #3b4bd6;
+  --shade: rgba(16, 20, 44, 0.46);
+  --sh-1: 0 1px 2px rgba(22, 26, 46, 0.06);
+  --sh-2: 0 14px 36px -10px rgba(22, 26, 46, 0.28);
+  color-scheme: light;
+  --side-bg: #f8f9fd;
+  --side-fg: #242b49;
+  --side-muted: #58617e;
+  --side-hover-bg: #eef0f8;
+  --side-active-bg: #e5e8fd;
+  --side-active-fg: #2c3ab0;
+  --side-border: #dadeea;
+  --side-logo: #805000;
+  --badge-bg: #f0ae35;
+  --badge-fg: #352605;
+  --on-danger: #ffffff;
+  --shadow-color: #161a2e24;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+
+  color-scheme: dark;
+  --bg: #0e1120;
+  --surface: #171b2e;
+  --surface-2: #1d2239;
+  --sunken: #0a0c18;
+  --line: #2a3050;
+  --line-strong: #3d456c;
+  --ink: #eceef8;
+  --ink-2: #b9bfd8;
+  --ink-3: #8d95b5;
+  --accent: #5364ee;
+  --accent-hover: #5667ed;
+  --accent-edge: #2f3cae;
+  --on-accent: #ffffff;
+  --accent-soft: #232a54;
+  --accent-text: #aab4ff;
+  --honey: #f5be55;
+  --honey-soft: #3a2d10;
+  --honey-text: #f8d68c;
+  --idle: #35bccb;
+  --idle-soft: #10343a;
+  --idle-text: #7fdde8;
+  --working: #3ccb83;
+  --working-soft: #12362a;
+  --working-text: #86e5b4;
+  --waiting: #f2b23a;
+  --waiting-soft: #3a2d10;
+  --waiting-text: #f8d68c;
+  --off: #7a819c;
+  --off-soft: #232840;
+  --off-text: #a9b0cb;
+  --danger: #ef6373;
+  --danger-soft: #3d1a22;
+  --danger-text: #ff9aa6;
+  --office-wall: #56331d;
+  --office-floor: #d9a758;
+  --office-ink: #2a1a0e;
+  --office-paper: #fff6e0;
+  --focus: #aab4ff;
+  --shade: rgba(3, 4, 12, 0.66);
+  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --sh-2: 0 16px 40px -10px rgba(0, 0, 0, 0.7);
+  --side-bg: #0a0c18;
+  --side-fg: #e9ebf7;
+  --side-muted: #9aa1c2;
+  --side-hover-bg: #161a2e;
+  --side-active-bg: #232a54;
+  --side-active-fg: #e9ebf7;
+  --side-border: #1f2440;
+  --side-logo: #f5be55;
+  --badge-bg: #f5be55;
+  --badge-fg: #352605;
+  --on-danger: #0a0c18;
+  --shadow-color: #00000060;
+  }
+}
+:root[data-theme="dark"] {
+
+  color-scheme: dark;
+  --bg: #0e1120;
+  --surface: #171b2e;
+  --surface-2: #1d2239;
+  --sunken: #0a0c18;
+  --line: #2a3050;
+  --line-strong: #3d456c;
+  --ink: #eceef8;
+  --ink-2: #b9bfd8;
+  --ink-3: #8d95b5;
+  --accent: #5364ee;
+  --accent-hover: #5667ed;
+  --accent-edge: #2f3cae;
+  --on-accent: #ffffff;
+  --accent-soft: #232a54;
+  --accent-text: #aab4ff;
+  --honey: #f5be55;
+  --honey-soft: #3a2d10;
+  --honey-text: #f8d68c;
+  --idle: #35bccb;
+  --idle-soft: #10343a;
+  --idle-text: #7fdde8;
+  --working: #3ccb83;
+  --working-soft: #12362a;
+  --working-text: #86e5b4;
+  --waiting: #f2b23a;
+  --waiting-soft: #3a2d10;
+  --waiting-text: #f8d68c;
+  --off: #7a819c;
+  --off-soft: #232840;
+  --off-text: #a9b0cb;
+  --danger: #ef6373;
+  --danger-soft: #3d1a22;
+  --danger-text: #ff9aa6;
+  --office-wall: #56331d;
+  --office-floor: #d9a758;
+  --office-ink: #2a1a0e;
+  --office-paper: #fff6e0;
+  --focus: #aab4ff;
+  --shade: rgba(3, 4, 12, 0.66);
+  --sh-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --sh-2: 0 16px 40px -10px rgba(0, 0, 0, 0.7);
+  --side-bg: #0a0c18;
+  --side-fg: #e9ebf7;
+  --side-muted: #9aa1c2;
+  --side-hover-bg: #161a2e;
+  --side-active-bg: #232a54;
+  --side-active-fg: #e9ebf7;
+  --side-border: #1f2440;
+  --side-logo: #f5be55;
+  --badge-bg: #f5be55;
+  --badge-fg: #352605;
+  --on-danger: #0a0c18;
+  --shadow-color: #00000060;
+}
+:root {
+  --rail-bg: var(--side-bg);
+  --rail-ink: var(--side-fg);
+  --rail-muted: var(--side-muted);
+  --rail-line: var(--side-border);
+  --rail-hover: var(--side-hover-bg);
+  --rail-active: var(--side-active-bg);
+  --scroll-thumb: var(--line-strong);
+  --scroll-thumb-hover: var(--ink-3);
+}

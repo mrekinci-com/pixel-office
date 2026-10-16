@@ -1,0 +1,32 @@
+.env
+.env.*
+!.env.example
+!.env.test.example
+docker-compose.override.yml
+office/data-test/
+runner/work-test/
+runner/test-code/
+tududi/db/
+tududi/uploads/
+.codex-log/
+.cache/
+yedek/
+runner/.smoke/
+
+# Also ignore symlink aliases in worktrees
+node_modules
+.cache
+.test-data/
+dist/
+*.log
+__pycache__/
+
+# Legacy installation data and private runner files remain in their old paths.
+ofis/data/
+ofis/data-deneme/
+calistirici/work/
+calistirici/work-deneme/
+calistirici/deneme-kod/
+calistirici/.duman/
+calistirici/piksel-ofis-calistirici.service
+calistirici/piksel-ofis-calistirici-deneme.service

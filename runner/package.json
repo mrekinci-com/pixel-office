@@ -1,0 +1,31 @@
+{
+  "name": "pixel-office-runner",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test:box": "node --env-file-if-exists=.env --import tsx --test tests/command.live.ts",
+    "test:claude-help": "node --import tsx --test tests/claude-help.live.ts",
+    "test:terminal-policy": "node --import tsx --test tests/terminal-policy.live.ts",
+    "test:terminal-startup": "node --import tsx --test tests/terminal-startup.live.ts",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc",
+    "test": "npm run build && node --import tsx --test --test-concurrency=1 tests/*.test.ts",
+    "start": "node --env-file-if-exists=.env dist/runner/src/index.js",
+    "smoke:real": "node scripts/smoke-real.mjs",
+    "smoke:director": "node scripts/smoke-director.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.2",
+    "@types/ws": "^8.18.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "node-pty": "^1.1.0",
+    "ws": "^8.22.0"
+  }
+}

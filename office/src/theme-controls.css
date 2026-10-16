@@ -1,0 +1,187 @@
+/* Apply theme and focus rules after all legacy style layers. */
+.rail {
+  border-right: 1px solid var(--side-border);
+}
+.brand-pixel,
+.brand-second,
+.rail .brand-pixel,
+.rail .brand-second {
+  color: var(--side-logo);
+}
+.rail .nav-item.active {
+  color: var(--side-active-fg);
+  position: relative;
+  box-shadow: none;
+}
+/* The rounded inset shadow made Chromium render corner pixels in two shades. */
+.rail .nav-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background: var(--side-logo);
+  pointer-events: none;
+}
+.rail .group-mark {
+  color: var(--side-fg);
+  text-shadow: 1px 0 var(--group-color);
+}
+.rail-bottom .connection,
+.rail-bottom .rail-owner {
+  color: var(--side-fg);
+}
+.theme-picker {
+  position: relative;
+  flex-shrink: 0;
+}
+.theme-picker .theme-button,
+.rail-bottom .theme-picker .theme-button {
+  min-height: 32px;
+  padding: 4px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink-2);
+  box-shadow: none;
+  font-size: 12px;
+  gap: 6px;
+}
+.theme-icon {
+  display: inline-flex;
+  font-size: 18px;
+  line-height: 1;
+}
+.theme-menu {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  right: 0;
+  z-index: 120;
+  width: 168px;
+  padding: 4px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  box-shadow: var(--sh-2);
+  background: var(--surface);
+  color: var(--ink);
+}
+.theme-menu button {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 8px;
+  border-radius: 5px;
+  color: var(--ink-2);
+  background: var(--surface);
+}
+.theme-menu button > span:last-child {
+  margin-left: auto;
+}
+.theme-menu button[aria-checked="true"] {
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+.theme-menu button:hover,
+.theme-picker .theme-button:hover {
+  background: var(--surface-2);
+}
+.login-header .theme-menu,
+.more-navigation .theme-menu {
+  bottom: auto;
+  top: calc(100% + 6px);
+}
+.rail-collapsed .theme-picker .theme-button {
+  min-width: 28px;
+  padding: 4px;
+}
+.rail-collapsed .theme-button .theme-icon {
+  display: inline-flex;
+}
+.danger-button {
+  color: var(--on-danger);
+}
+button:disabled {
+  opacity: 1;
+  color: var(--ink-3);
+  background: var(--surface-2);
+}
+.primary:disabled,
+.send-button:disabled {
+  background: var(--sunken);
+  box-shadow: none;
+}
+.camera-controls,
+.camera-hint {
+  color-scheme: inherit;
+}
+::placeholder {
+  color: var(--ink-3);
+  opacity: 1;
+}
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible,
+input:focus,
+textarea:focus,
+select:focus,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+.agent-hit:focus-visible,
+.department-hit:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+.rail :focus-visible {
+  outline-color: var(--focus);
+}
+.tabbar :focus-visible {
+  outline-color: var(--focus);
+}
+.chat-compose .compose-field {
+  position: relative;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--surface);
+  overflow: hidden;
+}
+.chat-compose .compose-field:focus-within {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+  border-color: var(--focus);
+}
+.chat-compose .compose-field textarea,
+.chat-slot .chat-compose .compose-field textarea {
+  display: block;
+  border: 0;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 10px 52px 44px 10px;
+  min-height: 80px;
+}
+.chat-compose .compose-field .send-button {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  margin: 0;
+  box-shadow: none;
+}
+.chat-compose .compose-field .send-button:focus-visible {
+  outline-color: var(--on-accent);
+}
+.agent-hit .agent-label,
+.department-plaque {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.agent-bubble {
+  overflow-wrap: anywhere;
+}
+
+.language-code { display: inline-grid; place-items: center; min-width: 18px; font-size: 11px; font-weight: 700; letter-spacing: .04em; line-height: 1; }
+.rail-bottom { flex-wrap: wrap; }

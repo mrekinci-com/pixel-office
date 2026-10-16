@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.cache/
+.test-data/
+data/
+.env
+*.log
+
+data-test/
+.env.*
+!.env.example
+!.env.test.example

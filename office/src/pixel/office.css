@@ -1,0 +1,123 @@
+/* Keep scene-specific changes here; preserve the navigation and chat shell. */
+.office-scene .office-stage,
+.office-scene.office-expanded .office-stage {
+  padding: 8px;
+}
+.canvas-scroll.office-viewport {
+  background: var(--office-scene-floor);
+  border: 0;
+  border-radius: 0;
+}
+.office-viewport .pixel-stage {
+  border-radius: 12px;
+  overflow: hidden;
+  outline: 1px solid var(--line-strong);
+  box-shadow: 0 3px 12px var(--shadow-color);
+}
+.office-viewport .department-hit {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+  color: var(--ink-2);
+  font-family: var(--f-body);
+  font-weight: 600;
+  line-height: 1;
+}
+.department-plaque {
+  position: absolute;
+  inset: 0 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 7px;
+  border: 2px solid var(--line-strong);
+  border-bottom: 2px solid var(--ink-2);
+  background: var(--surface);
+  box-shadow: inset 0 3px var(--department-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.department-name {
+  display: block;
+  line-height: 1.25;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+.department-hit::before,
+.department-hit::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  height: 6px;
+  background: var(--line-strong);
+  border-bottom: 2px solid var(--ink-2);
+}
+.department-hit::before { left: 10px; }
+.department-hit::after { right: 10px; }
+.office-viewport .department-hit:hover .department-plaque,
+.office-viewport .department-hit:focus-visible .department-plaque {
+  background: var(--surface-2);
+}
+.scene-sign {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--line-strong);
+  border-bottom: 2px solid var(--ink-2);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-family: var(--f-px);
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.office-viewport .agent-bubble { white-space:pre; word-break:normal; overflow-wrap:normal; z-index:8; }
+.office-viewport .scene-targets { z-index:6; }
+.agent-bubble::after { content:""; position:absolute; width:0; height:0; border:var(--bubble-tip-size,4px) solid transparent; left:var(--bubble-tip-x,50%); top:100%; border-top-color:var(--line-strong); transform:translateX(-50%); }
+.agent-bubble[data-tail="up"]::after { top:auto; bottom:100%; border-top-color:transparent; border-bottom-color:var(--line-strong); }
+.agent-bubble[data-tail="right"]::after { left:100%; top:var(--bubble-tip-y,50%); border-top-color:transparent; border-left-color:var(--line-strong); transform:translateY(-50%); }
+.agent-bubble[data-tail="left"]::after { left:auto; right:100%; top:var(--bubble-tip-y,50%); border-top-color:transparent; border-right-color:var(--line-strong); transform:translateY(-50%); }
+/* Keep names attached to feet; draw bubbles and signs above them. */
+.office-viewport .scene-targets { z-index: auto; }
+.office-viewport .scene-sign, .office-viewport .department-hit { z-index: 10; }
+.office-viewport .agent-label { z-index: 7; width: max-content; align-items: center; overflow: visible; }
+.office-viewport .agent-label .agent-name-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.agent-name-dot { flex: 0 0 var(--name-dot-size); width: var(--name-dot-size); height: var(--name-dot-size); border-radius: 0; background: var(--idle-text); }
+.agent-label[data-status="calisiyor"] .agent-name-dot { background: var(--working-text); }
+.agent-label[data-status="bekliyor"] .agent-name-dot { background: var(--waiting-text); }
+.agent-label[data-status="kapali"] .agent-name-dot { background: var(--off-text); box-shadow: inset 0 0 0 var(--name-link-width) var(--line-strong); }
+.agent-label[data-shifted="true"]::before { content: ""; position: absolute; left: 50%; bottom: 100%; height: var(--name-link-height); width: var(--name-link-width); background: var(--line-strong); }
+
+.director-screen { position: absolute; z-index: 4; border: 0; padding: 0; background: transparent; cursor: pointer; }
+.director-screen:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.director-screen:hover { background: var(--selection-tint); outline: 2px solid var(--focus); outline-offset: -2px; }
+.director-character { position:absolute; border:0; padding:0; background:transparent; z-index:5; }
+.director-character:focus-visible { outline:2px solid var(--focus); outline-offset:-2px; }
+.agent-hit[data-passive="true"] { background:transparent; }
+
+.office-expanded .camera-controls { top: auto; bottom: 12px; left: 12px; right: auto; }
+@media (max-width: 600px) {
+  .office-expanded .camera-controls { top: 12px; bottom: auto; }
+}
+
+/* Corner antialiasing differed between canvas rendering layers. */
+.office-status-pill {
+  border-radius: 0;
+  border: 1px solid var(--line-strong);
+}
+
+/* Initial minimum chat width for short screens; preserve manually selected ratios. */
+@media (min-width: 901px) {
+  .office-layout:not(.is-expanded) { grid-template-columns: clamp(328px, var(--chat-split), calc(100% - 308px)) 8px minmax(0, 1fr); }
+}
+
+.scene-heading .office-status-text{position:static;inset:auto;align-self:center;margin:0;padding:3px 7px;font-size:11px;white-space:nowrap;box-shadow:none;}

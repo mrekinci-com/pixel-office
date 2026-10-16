@@ -1,0 +1,78 @@
+# Pixel Office: management panel (office) and agent notebook (tududi).
+# No database, network or settings are shared with other installations.
+name: pixel-office
+services:
+  tududi:
+    image: ${PIKSEL_OFIS_TUDUDI_IMAGE:-pixel-office-tududi:0.87-po.3}
+    container_name: pixel-office-tududi
+    restart: unless-stopped
+    env_file: ./tududi/.env
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+      PORT: "9393"
+      # The owner accesses agent accounts through the private-network proxy (9394).
+      FRONTEND_URL: http://${OFIS_PRIVATE_IP:-127.0.0.1}:9394
+      TUDUDI_ALLOWED_ORIGINS: http://localhost:9393,http://127.0.0.1:9393,http://${OFIS_PRIVATE_IP:-127.0.0.1}:9394,http://${OFIS_PRIVATE_IP:-127.0.0.1}:9400
+      TUDUDI_INTERNAL_SSL_ENABLED: "false"
+      PANEL_ACCESS_ENABLED: "false"
+      # Office signs into Tududi for each agent action; the default login limit
+      # (five per 15 minutes) is too low for this server-local instance.
+      RATE_LIMIT_AUTH_MAX: "300"
+    ports:
+      - "127.0.0.1:9393:9393"
+      # Office shares this container’s network; publish its port here.
+      - "127.0.0.1:9400:9400"
+      # The optional local Compose override adds private-network access.
+    volumes:
+      - ./tududi/db:/app/backend/db
+      - ./tududi/uploads:/app/backend/uploads
+
+  office:
+    build:
+      context: ./office
+    image: pixel-office:latest
+    container_name: pixel-office
+    restart: unless-stopped
+    depends_on:
+      - tududi
+    env_file: ./office/.env
+    environment:
+      PORT: "9400"
+      OFIS_DATA_DIR: /app/data
+      # OFIS_RUNNER_KEY comes from ./office/.env and is shared with the host runner.
+      TUDUDI_BASE_URL: http://127.0.0.1:9393
+      OFIS_PUBLIC_URL: http://${OFIS_PRIVATE_IP:-127.0.0.1}:9400
+      TUDUDI_PUBLIC_URL: http://${OFIS_PRIVATE_IP:-127.0.0.1}:9394
+    # Tududi treats only requests to "127.0.0.1:9393" as private;
+    # Office therefore shares its network namespace.
+    network_mode: "service:tududi"
+    volumes:
+      - ./office/data:/app/data
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
+    stop_grace_period: 20s
+
+  # Proxy exposing agent Tududi to private-network browsers: forward to 127.0.0.1:9393
+  # with "Host: 127.0.0.1:9393" (the Tududi fork treats only this address as private).
+  tududi-proxy:
+    image: pixel-office:latest
+    container_name: pixel-office-tududi-proxy
+    network_mode: host
+    command: [node, dist/server/proxy-index.js]
+    environment:
+      TUDUDI_PROXY_BIND: ${OFIS_PRIVATE_IP:-127.0.0.1}
+      TUDUDI_PROXY_PORT: "9394"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
+    restart: unless-stopped

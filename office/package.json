@@ -1,0 +1,53 @@
+{
+  "name": "pixel-office",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env --import tsx --watch server/index.ts",
+    "dev:ui": "vite --host 127.0.0.1",
+    "build": "npm run typecheck && vite build && tsc -p tsconfig.server.json",
+    "start": "node --env-file-if-exists=.env dist/server/index.js",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.server.json --noEmit && tsc -p tsconfig.tests.json --noEmit",
+    "test": "node --import tsx --test --test-concurrency=1 tests/*.test.ts",
+    "test:live": "node --import tsx --test tests/tududi.live.ts",
+    "test:browser": "node scripts/browser.mjs",
+    "test:scene": "node --import tsx tests/browser.b19.ts",
+    "test:visual": "node scripts/visual.mjs",
+    "test:live:b1": "node --import tsx --test tests/schedules.live.ts",
+    "test:terminal:claude": "OFIS_TERMINAL_TEST_PROVIDER=claude node --import tsx tests/terminal.browser.ts",
+    "test:terminal": "node --import tsx tests/terminal.browser.ts",
+    "test:i18n:browser": "node --import tsx tests/browser.g2.ts",
+    "test:reset:browser": "node --import tsx tests/browser.fr.ts",
+    "test:u1:browser": "node --import tsx tests/browser.u1.ts",
+    "screenshots": "node scripts/screenshots.mjs",
+    "tududi:turkish": "node --import tsx scripts/tududi-turkish.ts"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/rate-limit": "^10.3.0",
+    "@fastify/static": "^10.1.6",
+    "@fastify/websocket": "^11.3.4",
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0",
+    "fastify": "^5.6.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "ws": "^8.22.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.2",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/ws": "^8.18.2",
+    "@vitejs/plugin-react": "^5.0.4",
+    "playwright": "^1.56.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.9"
+  }
+}

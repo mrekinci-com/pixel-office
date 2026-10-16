@@ -1,0 +1,194 @@
+/* Task board uses the remaining page height with one scrollbar per column. */
+.tududi-page .page-heading {
+  height: auto;
+  min-height: 56px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+.tududi-actions {
+  margin-left: auto;
+  gap: 8px;
+}
+.tududi-actions > button {
+  height: 36px;
+  white-space: nowrap;
+}
+.tududi-page .tududi-toolbar {
+  display: grid;
+  grid-template-columns: minmax(180px, 264px) minmax(0, auto);
+  align-items: end;
+  justify-content: start;
+  gap: 6px 12px;
+  margin-bottom: 16px;
+}
+.tududi-page .tududi-toolbar > label {
+  min-width: 0;
+  margin: 0;
+}
+.tududi-page .tududi-toolbar select,
+.tududi-page .tududi-login > button {
+  height: 38px;
+  min-height: 38px;
+  margin: 0;
+  padding: 6px 12px;
+  font-size: 13px;
+}
+.tududi-page .tududi-login > button {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  box-shadow: none;
+}
+.tududi-page .tududi-toolbar > .field-help {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 12px;
+}
+.tududi-page .projects-strip {
+  margin-bottom: 16px;
+}
+.tududi-page .projects-strip h2,
+.tududi-page .tasks-section h2 {
+  margin-bottom: 10px;
+}
+.tududi-page .projects-strip article {
+  padding: 8px 12px;
+}
+.tududi-page .task-columns {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: 12px;
+  max-height: var(--task-board-height, 60dvh);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0;
+  scrollbar-width: thin;
+}
+.tududi-page .task-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  max-height: var(--task-board-height, 60dvh);
+  padding: 12px 8px 8px;
+}
+.tududi-page .task-column > h3 {
+  flex: 0 0 auto;
+  margin: 0 4px 12px;
+}
+.task-column-body {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.task-column-body:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.tududi-page .task-card {
+  flex: 0 0 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 12px;
+  cursor: pointer;
+}
+.tududi-page .task-card h4 {
+  margin: 0;
+}
+.task-card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  width: 100%;
+  min-height: 0;
+  max-height: 3em;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: var(--ink);
+  font: 600 13px/1.5 var(--f-body);
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.task-card-title:hover {
+  background: transparent;
+  color: var(--accent-text);
+}
+.tududi-page .task-card p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  max-height: 4.5em;
+  overflow: hidden;
+  margin: 8px 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.tududi-page .task-card label {
+  margin: 10px 0 0;
+}
+.tududi-page .task-card select {
+  width: 100%;
+  min-height: 30px;
+  height: 30px;
+  padding: 4px 8px;
+  font-size: 11px;
+}
+.tududi-page .column-empty {
+  padding: 16px 4px;
+  margin: 0;
+  font-size: 12px;
+}
+.tududi-page .archived-tasks .task-card {
+  margin-top: 12px;
+}
+.task-detail h3,
+.task-detail p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.task-detail h3 {
+  margin: 0 0 16px;
+}
+@media (max-width: 1200px) {
+  .tududi-page .task-columns {
+    grid-template-columns: repeat(4, minmax(240px, 1fr));
+    padding-bottom: 8px;
+    max-height: calc(var(--task-board-height, 60dvh) + 8px);
+  }
+}
+@media (max-width: 600px) {
+  .tududi-actions {
+    margin-left: 0;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .tududi-page .tududi-toolbar {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+  }
+  .tududi-page .tududi-toolbar > .field-help {
+    line-height: 1.5;
+  }
+  .tududi-page .tududi-login > button {
+    height: auto;
+    width: 100%;
+  }
+  .tududi-page .task-columns {
+    grid-template-columns: repeat(4, minmax(240px, 80vw));
+  }
+}

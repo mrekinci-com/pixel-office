@@ -1,0 +1,166 @@
+/* A2.4: shared scrollbars, chat and office toolbar. */
+* { scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) transparent; }
+*:hover { scrollbar-color: var(--scroll-thumb-hover) transparent; }
+/* Remove native scrollbar arrow buttons in Chromium/Safari too. */
+@supports selector(::-webkit-scrollbar) {
+  * { scrollbar-width: auto; scrollbar-color: auto; }
+  *:hover { scrollbar-color: auto; }
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border: 1px solid transparent; background-clip: padding-box; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--scroll-thumb-hover); }
+::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+::-webkit-scrollbar-corner { background: transparent; }
+.chat-messages, .scroll-list, .management-page, .modal, .agent-sheet,
+.login-screen, textarea, pre, .chat-tabs { scrollbar-gutter: stable; }
+
+.rail-chats { min-height: 0; --rail-row-step: 38px; }
+.rail-groups, .rail-direct { flex: 1 1 0; min-height: 26px; max-height: none; }
+.rail-groups[data-open="false"], .rail-direct[data-open="false"] { flex: 0 0 26px; }
+.rail-groups[data-open="true"], .rail-direct[data-open="true"] { min-height: 138px; }
+.rail-groups { flex: 0 1 auto; max-height: 50%; }
+.rail-groups[data-open="true"] { flex-basis: calc(26px + var(--list-count) * var(--rail-row-step) - 2px); }
+.rail-chats:has(.rail-direct[data-open="false"]) .rail-groups { max-height: none; flex-grow: 1; }
+.rail-chats .scroll-list { flex: 0 0 auto; min-height: 0; padding: 0 3px; overscroll-behavior: contain; }
+@supports selector(::-webkit-scrollbar) { .rail-chats .scroll-list { scrollbar-width: auto; } }
+.rail-chats .nav-item { flex: 0 0 36px; margin: 0; }
+.scroll-list { --fade-top: 0px; --fade-bottom: 0px;
+  mask-image: linear-gradient(to bottom, transparent, var(--ink) var(--fade-top), var(--ink) calc(100% - var(--fade-bottom)), transparent); }
+.scroll-list[data-fade-top="true"] { --fade-top: 16px; }
+.scroll-list[data-fade-bottom="true"] { --fade-bottom: 16px; }
+@media (min-width: 901px) and (max-height: 800px) {
+  .rail { gap: 4px; }
+  .rail-brand, .rail-collapsed .rail-brand { height: 44px; flex-basis: 44px; }
+  .rail > nav .nav-item { height: 28px; min-height: 28px; }
+  .rail-bottom { height: 40px; flex-basis: 40px; padding: 4px 2px; }
+  .rail-chats { gap: 4px; padding-top: 4px; --rail-row-step: 30px; }
+  .rail-chats .nav-item { height: 28px; min-height: 28px; flex-basis: 28px; }
+  .rail-groups[data-open="true"], .rail-direct[data-open="true"] { min-height: 114px; }
+  .rail-avatar { height: 28px; }
+  .rail-collapsed .rail-bottom { height: 76px; flex-basis: 76px; }
+}
+.rail-collapsed .rail-chats > section[data-open="true"] { min-height: 88px; }
+
+.floating-chat { position: relative; }
+.floating-chat .chat-messages, .chat-slot .floating-chat .chat-messages { padding: 14px 18px; }
+.floating-chat .message { display: flex; flex-direction: column; align-items: flex-start; width: fit-content;
+  max-width: 78%; min-width: 0; margin: 14px 0 0; text-align: left; }
+.floating-chat .message.mine { margin-left: auto; align-items: flex-end; }
+.floating-chat .message.grouped { margin-top: 4px; }
+.floating-chat .message-author { display: flex; align-items: center; gap: 6px; width: 100%; min-width: 0; margin-bottom: 4px; color: var(--ink-2); font-size: 11px; }
+.message-author canvas { flex-shrink: 0; }
+.message-sender { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.floating-chat .message-author time { margin-left: auto; flex-shrink: 0; font-size: 10px; color: var(--ink-3); }
+.floating-chat .deleted-author { color: var(--ink-3); }
+.message-bubble { max-width: 100%; min-width: 0; border-radius: 10px; background: var(--surface-2); padding: 9px 12px; color: var(--ink); }
+.floating-chat .mine .message-bubble { background: var(--accent); color: var(--on-accent); border-radius: 10px 10px 3px 10px; }
+.message-body { line-height: 1.55; font-size: 14px; overflow-wrap: anywhere; }
+.message-body.folded { max-height: calc(12 * 1.55 * 14px); overflow: hidden; }
+.floating-chat .message .message-body p { margin: 0 0 8px; padding: 0; background: transparent; color: inherit; border-radius: 0; font-size: inherit; line-height: inherit; white-space: pre-wrap; }
+.floating-chat .message .message-body p:last-child { margin-bottom: 0; }
+.message-body ul, .message-body ol { margin: 8px 0; padding-left: 20px; }
+.message-body li { padding-left: 2px; }
+.message-body code { font-family: var(--f-mono); font-size: 12px; background: var(--sunken); color: var(--ink); padding: 1px 4px; border-radius: 3px; }
+.message-body pre { white-space: pre-wrap; overflow-wrap: anywhere; margin: 8px 0; padding: 8px; border-radius: 5px; background: var(--sunken); color: var(--ink); }
+.message-body pre code { padding: 0; }
+.message-body a { color: var(--accent-text); text-decoration: underline; }
+.message-expand { display: block; font-size: 11px; padding: 4px 0; background: transparent; color: inherit; text-decoration: underline; margin-top: 4px; }
+.floating-chat .message-receipt { font-size: 10px; margin-top: 3px; color: var(--ink-3); }
+.message-status { text-align: right; line-height: 1.5; max-width: 100%; }
+.message-status button { margin-left: 4px; }
+.chat-day { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 12px 0; color: var(--ink-3); font-size: 11px; }
+.chat-day::before, .chat-day::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+.chat-event { margin: 12px 0; color: var(--ink-3); font-size: 11px; }
+.event-line { display: flex; align-items: center; gap: 5px; min-width: 0; }
+.event-line > svg { flex-shrink: 0; }
+.event-summary { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.chat-event button { flex-shrink: 0; color: var(--ink-2); background: transparent; min-height: 26px; font-size: 11px; padding: 3px 4px; text-decoration: underline; }
+.event-details { margin-top: 4px; padding: 8px; border-left: 2px solid var(--line-strong); overflow-wrap: anywhere; line-height: 1.6; }
+.event-details > div + div { margin-top: 6px; }
+.chat-welcome { display: flex; align-items: center; justify-content: center; min-height: 100%; padding: 20px; text-align: center; background: transparent; color: var(--ink-3); font-size: 13px; }
+.new-messages { align-self: center; position: absolute; bottom: calc(var(--compose-height, 63px) + 17px); z-index: 2; padding: 6px 12px; border: 1px solid var(--line-strong); border-radius: 16px; font-size: 12px; background: var(--surface); color: var(--accent-text); box-shadow: var(--sh-1); }
+.chat-stop { flex-shrink: 0; background: var(--surface); color: var(--ink-2); }
+.chat-shortcuts { min-width: 0; }
+
+.chat-slot .chat-compose, .floating-chat .chat-compose { padding: 10px 12px; background: var(--surface); }
+.chat-compose .compose-field { display: flex; align-items: flex-start; padding-right: 42px; min-height: 42px; }
+.recipient-picker { display: flex; align-items: center; flex: 0 1 auto; max-width: 35%; min-width: 0; padding-left: 8px; height: 40px; }
+.recipient-picker .recipient-caption { flex-shrink: 0; margin: 0; color: var(--ink-3); font-size: 11px; }
+.chat-compose .recipient-picker select, .chat-slot .chat-compose .recipient-picker select { appearance: none; background: transparent; background-image: none; border: 0; box-shadow: none; border-radius: 4px;
+  height: 28px; min-height: 28px; min-width: 0; width: auto; max-width: 100%; margin: 0; padding: 4px; font-size: 11px; color: var(--ink-2); text-overflow: ellipsis; overflow: hidden; cursor: pointer; }
+.chat-compose .compose-field textarea, .chat-slot .chat-compose .compose-field textarea { flex: 1; width: 0; min-width: 0; height: 40px; min-height: 40px; max-height: 180px;
+  border: 0; outline: none; box-shadow: none; padding: 10px 6px; resize: none; font-size: 13px; line-height: 20px; overflow-y: auto; }
+.chat-compose .compose-field .send-button { width: 28px; height: 28px; min-height: 28px; right: 6px; bottom: 6px; padding: 0; }
+.chat-help { font-size: 11px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.mention-list { bottom: calc(100% - 8px); }
+.output-card { max-width: 100%; font-size: 12px; }
+.chat-progress { max-width: 100%; overflow-wrap: anywhere; }
+.chat-progress p { max-height: 160px; overflow-y: auto; white-space: pre-wrap; }
+
+.scene-heading { overflow: visible; position: relative; }
+/* Place important notices above the office without covering chat actions. */
+.workspace:has(.office-page) > .runtime-alerts { position: static; transform: none; width: auto; max-width: none;
+  flex: 0 0 auto; max-height: 25%; overflow-y: auto; margin: 8px 12px 0; scrollbar-gutter: stable; }
+.office-scene { container-type: inline-size; container-name: office; }
+.scene-heading .short-label { display: none; }
+.runner-strip { flex: 1; min-width: 0; }
+.runner-status { display: inline-flex; align-items: center; gap: 5px; min-width: 8px; color: var(--ink-3); }
+.runner-status i { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: var(--working); }
+.runner-status.problem { color: var(--waiting-text); }
+.runner-status.problem i { background: var(--waiting); }
+.scene-heading .stop-all { color: var(--danger-text); background: var(--danger-soft); border-color: var(--danger); font-size: 11px; }
+.scene-heading .approval-badge { color: var(--waiting-text); background: var(--waiting-soft); font-size: 11px; }
+.office-more { position: relative; flex-shrink: 0; margin-left: auto; }
+.scene-heading .office-more > button { padding: 0; width: 28px; font-size: 20px; }
+.office-actions { position: absolute; right: 0; top: calc(100% + 6px); z-index: 85; background: var(--surface); color: var(--ink); border: 1px solid var(--line-strong); padding: 4px; border-radius: 6px; box-shadow: var(--sh-2); width: 150px; }
+.office-actions button { width: 100%; color: var(--ink-2); background: transparent; text-align: left; justify-content: flex-start; padding: 6px 8px; font-size: 12px; }
+.office-actions button:hover { background: var(--surface-2); }
+.scene-heading .expand-button { margin-left: 0; flex-shrink: 0; }
+@container office (max-width: 430px) {
+  .scene-heading { gap: 4px; padding: 0 8px; }
+  .scene-heading .office-name { max-width: 72px; overflow: hidden; text-overflow: ellipsis; font-size: 12px; padding: 3px 5px; }
+  .runner-strip { gap: 4px; }
+  .runner-strip .secondary { padding: 3px 4px; font-size: 10px; }
+  .scene-heading .stop-all .full-label, .scene-heading .expand-button .action-label { display: none; }
+  .scene-heading .stop-all .short-label { display: inline; color: var(--danger-text); }
+  .scene-heading .expand-button { padding: 3px 5px; min-width: 28px; }
+  .runner-status.problem span { font-size: 10px; }
+}
+@media (max-width: 900px) {
+  .floating-chat .chat-messages, .chat-slot .floating-chat .chat-messages { padding: 12px; }
+  .conversation-members > span { display: none; }
+  .chat-shortcuts button { padding: 3px; font-size: 10px; }
+  .scene-heading { gap: 5px; }
+  .scene-heading .office-name { font-size: 12px; padding: 3px 5px; }
+  .runner-strip { gap: 4px; }
+  .runner-strip button { padding: 3px 4px; font-size: 10px; }
+  .runner-status.problem span { font-size: 10px; }
+  .scene-heading .expand-button { font-size: 11px; padding: 3px 5px; }
+}
+
+/* In expanded view, keep chat above the scene and inside the viewport. */
+.office-scene.office-expanded .float-slot { position: absolute; inset: 8px; pointer-events: none; z-index: 12; }
+.office-scene.office-expanded .float-slot > div { pointer-events: none; }
+.office-scene.office-expanded .floating-chat {
+  position: absolute; left: auto; right: 8px; bottom: 8px; top: auto;
+  width: min(380px, calc(100% - 16px)); height: min(560px, calc(100% - 64px));
+  max-height: calc(100% - 64px); min-height: 0; display: flex; flex-direction: column;
+  pointer-events: auto; overflow: hidden;
+}
+.office-scene.office-expanded .chat-launcher {
+  position: absolute; left: auto; right: 8px; bottom: 8px; top: auto;
+  max-width: calc(100% - 16px); pointer-events: auto; z-index: 12;
+}
+.office-scene.office-expanded .chat-launcher-stop { position: absolute; left: auto; right: 150px; bottom: 8px; pointer-events: auto; }
+.office-scene.office-expanded .floating-chat .chat-messages { min-height: 0; flex: 1 1 auto; }
+.office-scene.office-expanded .floating-chat .chat-compose { flex-shrink: 0; }
+/* The B2 minimized card shares this corner; keep chat above it. */
+body:has(.gm-minimized) .office-scene.office-expanded .float-slot { bottom: 112px; }
+
+@media (max-width: 900px) {
+  .office-scene.office-expanded .floating-chat { height: min(56dvh, calc(100% - 64px)); }
+}
+@media (max-width: 700px) {
+  body:has(.gm-minimized) .office-scene.office-expanded .float-slot { bottom: 176px; }
+}

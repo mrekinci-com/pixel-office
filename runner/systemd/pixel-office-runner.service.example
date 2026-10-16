@@ -1,0 +1,25 @@
+# scripts/install.sh fills these placeholders in .cache/install/.
+# Add the Codex executable directory to PATH if necessary.
+[Unit]
+Description=Pixel Office agent runner
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=@RUNNER_DIR@
+EnvironmentFile=@ENV_FILE@
+Environment=@PATH@
+ExecStart=@NODE_BIN@ dist/runner/src/index.js
+Restart=on-failure
+RestartSec=5
+KillMode=control-group
+TimeoutStopSec=20
+UMask=0077
+MemoryMax=6G
+TasksMax=2048
+CPUQuota=200%
+NoNewPrivileges=true
+# Bubblewrap requires user namespaces.
+
+[Install]
+WantedBy=default.target
