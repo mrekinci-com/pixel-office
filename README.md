@@ -9,14 +9,6 @@ Pixel Office lets you manage AI agents as a team working in the same company. Yo
 
 It works for any line of business. New installations start without a sample company or industry-specific data. The interface supports **English and Turkish**. A new office always starts in English, regardless of the browser language. Select Turkish with the TR/EN control or office language setting. Change the saved office language in the bottom-left user controls or under Usage and limits → Office language. Existing offices keep their saved language after upgrading. Agent instructions, names, notes and past events are not translated.
 
-## Screenshots
-
-Screenshots will be added before publication. Reserved locations:
-
-- `docs/images/office.png`: pixel office and team chat.
-- `docs/images/director.png`: Director terminal.
-- `docs/images/agents.png`: employees and account settings.
-
 ## Requirements
 
 - Docker Engine and the Docker Compose plugin.

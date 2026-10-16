@@ -9,14 +9,6 @@ Piksel Ofis, yapay zekâ ajanlarını aynı şirkette çalışan bir ekip gibi y
 
 Her iş kolu için kullanılabilir. Hazır bir şirket veya belirli bir sektöre ait verilerle başlamaz. Arayüz Türkçe ve İngilizcedir. Yeni ofis, tarayıcı dilinden bağımsız olarak İngilizce açılır. Türkçe, TR/EN düğmesinden veya ofis dili ayarından seçilir. Tercih sol alttaki kullanıcı menüsünden veya Kullanım ve kota ekranındaki Ofis dili ayarından değiştirilip saklanır. Mevcut ofislerin saklanan dili korunur; kullanıcı talimatları, adları, notları ve eski olayları çevrilmez.
 
-## Ekran görüntüleri
-
-Görüntüler yayın hazırlığında eklenecek. Ayrılan yerler:
-
-- `docs/images/office.png`: piksel ofis ve ekip sohbeti.
-- `docs/images/director.png`: Genel Müdür terminali.
-- `docs/images/agents.png`: çalışanlar ve hesap ayarları.
-
 ## Gereksinimler
 
 - Docker Engine ve Docker Compose eklentisi.
